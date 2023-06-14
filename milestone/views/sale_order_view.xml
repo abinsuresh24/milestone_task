@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Adding new button and milestone field in sale order-->
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit.milestone</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='qty_delivered']"
+                   position="before">
+                <field name="milestone"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']"
+                   position="before">
+                <button name="action_create_project" string="Create Project"
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': [('task_count','!=',0)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']"
+                   position="after">
+                <button name="action_update_project" string="Update Project"
+                        type="object" class="oe_highlight"
+                        attrs="{'invisible': [('task_count','=',0)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_preview_sale_order']"
+                   position="before">
+                <button name="smart_button_project" string="Project"
+                        type="object"
+                        class="oe_stat_button" icon="fa-check-square-o"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']"
+                   position="before">
+                <field name="task_count" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--     form view of the inherited model -->
+    <record id="project_task_view_form" model="ir.ui.view">
+        <field name="name">project.task.view.form.inherit.milestone.tasks</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='milestone_id']" position="after">
+                <field name="order_lines_number"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
